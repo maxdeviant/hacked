@@ -46,6 +46,24 @@ router.route('/register')
         })
     });
 
+router.route('/login')
+    .get(function (req, res) {
+        return res.render('login');
+    })
+    .post(function (req, res) {
+        models.User.find({
+            username: req.body.username
+        }).success(function (user) {
+            user.comparePassword(req.body.password, function (err, isMatch) {
+                if (isMatch) {
+                    return res.redirect('/');
+                }
+
+                return res.render('login');
+            });
+        });
+    });
+
 router.route('/execute')
     .post(function (req, res) {
         var command = req.body.command;
