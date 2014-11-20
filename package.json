@@ -1,0 +1,28 @@
+{
+  "name": "hacked",
+  "version": "0.0.0",
+  "description": "Fulfill your hacker fantasies.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxdeviant/hacked.git"
+  },
+  "author": "Marshall Bowers <elliott.codes@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maxdeviant/hacked/issues"
+  },
+  "homepage": "https://github.com/maxdeviant/hacked",
+  "dependencies": {
+    "debug": "^2.1.0",
+    "ejs": "^1.0.0",
+    "express": "^4.10.2",
+    "morgan": "^1.5.0",
+    "mysql": "^2.5.3",
+    "sequelize": "^2.0.0-rc2",
+    "socket.io": "^1.2.0"
+  }
+}
