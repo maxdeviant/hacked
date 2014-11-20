@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/maxdeviant/hacked",
   "dependencies": {
+    "body-parser": "^1.9.2",
     "debug": "^2.1.0",
     "ejs": "^1.0.0",
     "express": "^4.10.2",
