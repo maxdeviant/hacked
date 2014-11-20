@@ -38,7 +38,7 @@ router.route('/register')
             })
             .save()
             .success(function (callback) {
-                return res.redirect('/register');
+                return res.redirect('/');
             })
             .error(function (error) {
                 return res.json(error);
