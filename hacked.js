@@ -26,6 +26,26 @@ router.route('/')
         return res.render('index');
     });
 
+router.route('/register')
+    .get(function (req, res) {
+        return res.render('register');
+    })
+    .post(function (req, res) {
+        models.User.encryptPassword(req.body.password, function (hash) {
+            models.User.build({
+                username: req.body.username,
+                password: hash
+            })
+            .save()
+            .success(function (callback) {
+                return res.redirect('/register');
+            })
+            .error(function (error) {
+                return res.json(error);
+            });
+        })
+    });
+
 router.route('/execute')
     .post(function (req, res) {
         var command = req.body.command;
