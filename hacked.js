@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var path = require('path');
 var debug = require('debug')('express');
+var session = require('express-session');
 
 // Import database models
 var models = require('./models');
@@ -18,6 +19,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
+app.use(session({ secret: 'SUPER_SECRET_KEY' }))
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
