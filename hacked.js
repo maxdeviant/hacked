@@ -1,18 +1,22 @@
 'use strict';
 
+// Import server modules
 var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var path = require('path');
 var debug = require('debug')('express');
 
+// Import database models
+var models = require('./models');
+
+// Import custom modules
+var Command = require('./lib/command');
+
+// Initialize server
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-
-var models = require('./models');
-
-var Command = require('./lib/command');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
