@@ -4,15 +4,37 @@
     <title>Hacked</title>
 
     <link rel="stylesheet" type="text/css" href="/css/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/foundation.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="shell">
-            <input id="command" type="text" name="command">
+    <div class="contain-to-grid">
+        <div class="top-bar">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="/">Hacked</a></h1>
+                </li>
+            </ul>
+            <div class="top-bar-section">
+                <ul class="right">
+                    <li><a href="/login">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="small-12 column shell">
+        <div class="row">
+            <div class="small-12 column">
+                <div class="output">
+                    <% for (var i in output) { %>
+                        <div class="row"><%= output[i] %></div>
+                    <% } %>
+                </div>
+                <input id="command" type="text" name="command">
+            </div>
         </div>
     </div>
     <script>

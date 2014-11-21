@@ -26,6 +26,8 @@ var router = express.Router();
 
 router.route('/')
     .get(function (req, res) {
+        app.locals.output = [];
+
         return res.render('index');
     });
 
