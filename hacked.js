@@ -6,18 +6,22 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var path = require('path');
 var debug = require('debug')('express');
+var jwt = require('jwt-simple');
 var session = require('express-session');
 
 // Import database models
 var models = require('./models');
 
 // Import custom modules
+var jwtauth = require('./lib/jwt-auth');
 var Command = require('./lib/command');
 
 // Initialize server
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+
+app.set('jwtTokenSecret', 'U1VQRVJfU0VDUkVUX0tFWQ==');
 
 app.use(session({ secret: 'SUPER_SECRET_KEY' }))
 app.use(logger('dev'));
@@ -33,7 +37,7 @@ app.set('view engine', 'ejs');
 var router = express.Router();
 
 router.route('/')
-    .get(function (req, res) {
+    .get([jwtauth], function (req, res) {
         app.locals.output = [];
 
         return res.render('index');
@@ -69,6 +73,16 @@ router.route('/login')
         }).success(function (user) {
             user.comparePassword(req.body.password, function (err, isMatch) {
                 if (isMatch) {
+                    var expires = new Date();
+                    expires.setDate(expires.getDate() + 7);
+
+                    var token = jwt.encode({
+                        iss: user.username,
+                        exp: expires
+                    }, app.get('jwtTokenSecret'));
+
+                    req.session.token = token;
+
                     return res.redirect('/');
                 }
 
@@ -78,7 +92,7 @@ router.route('/login')
     });
 
 router.route('/execute')
-    .post(function (req, res) {
+    .post([jwtauth], function (req, res) {
         var command = new Command(req.body.command);
 
         return res.status(200).json({
