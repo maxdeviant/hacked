@@ -78,7 +78,9 @@ router.route('/login')
     })
     .post(function (req, res) {
         models.User.find({
-            username: req.body.username
+            where: {
+                username: req.body.username
+            }
         }).success(function (user) {
             user.comparePassword(req.body.password, function (err, isMatch) {
                 if (isMatch) {
@@ -91,6 +93,10 @@ router.route('/login')
                     }, app.get('jwtTokenSecret'));
 
                     req.session.token = token;
+
+                    io.emit('broadcast-login', {
+                        message: user.username + ' has come online.'
+                    });
 
                     return res.redirect('/');
                 }
@@ -108,16 +114,6 @@ router.route('/logout')
     });
 
 app.use('/', router);
-
-io.on('connection', function (socket) {
-    socket.emit('news', {
-        hello: 'world'
-    });
-
-    socket.on('some event', function (data) {
-        console.log(data);
-    });
-});
 
 app.set('port', process.env.PORT || 3000);
 

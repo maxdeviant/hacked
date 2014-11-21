@@ -1,8 +1,7 @@
-var socket = io.connect('http://localhost:3000');
+var socket = io();
 
-socket.on('news', function (data) {
+socket.on('broadcast-login', function (data) {
     console.log(data);
-    socket.emit('some event', { my: 'data' });
 });
 
 $('#command').keyup(function (e) {
