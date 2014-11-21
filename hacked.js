@@ -43,6 +43,15 @@ router.route('/')
         return res.render('index');
     });
 
+router.route('/execute')
+    .post([jwtauth], function (req, res) {
+        var command = new Command(req.body.command);
+
+        return res.status(200).json({
+            message: command.execute()
+        });
+    });
+
 router.route('/register')
     .get(function (req, res) {
         return res.render('register');
@@ -91,12 +100,10 @@ router.route('/login')
         });
     });
 
-router.route('/execute')
-    .post([jwtauth], function (req, res) {
-        var command = new Command(req.body.command);
-
-        return res.status(200).json({
-            message: command.execute()
+router.route('/logout')
+    .get(function (req, res) {
+        req.session.destroy(function (err) {
+            return res.redirect('login');
         });
     });
 
