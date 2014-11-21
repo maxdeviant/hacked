@@ -12,6 +12,8 @@ var io = require('socket.io')(server);
 
 var models = require('./models');
 
+var Command = require('./lib/command');
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -71,10 +73,10 @@ router.route('/login')
 
 router.route('/execute')
     .post(function (req, res) {
-        var command = req.body.command;
+        var command = new Command(req.body.command);
 
         return res.status(200).json({
-            message: 'Command: "' + command + '" received.'
+            message: command.execute()
         });
     });
 
