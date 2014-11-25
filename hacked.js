@@ -45,7 +45,9 @@ router.route('/')
 
 router.route('/execute')
     .post([jwtauth], function (req, res) {
-        var command = new Command(req.body.command);
+        var username = jwt.decode(req.session.token, app.get('jwtTokenSecret')).iss;
+        
+        var command = new Command(io, username, req.body.command);
 
         return res.status(200).json({
             message: command.execute()

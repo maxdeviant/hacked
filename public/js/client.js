@@ -1,7 +1,11 @@
 var socket = io();
 
 socket.on('broadcast-login', function (data) {
-    console.log(data);
+    $('#output').append('<div>' + data.message + '</div>');
+});
+
+socket.on('broadcast-say', function (data) {
+    $('#output').append('<div>' + data.message + '</div>');
 });
 
 $('#command').keyup(function (e) {
