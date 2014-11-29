@@ -8,6 +8,10 @@ socket.on('broadcast-say', function (data) {
     $('#output').append('<div>' + data.message + '</div>');
 });
 
+socket.on(user + '-response', function (data) {
+    console.log(data);
+});
+
 $('#command').keyup(function (e) {
     if (e.keyCode === 13) {
         var command = $('#command').val();
@@ -21,3 +25,4 @@ $('#command').keyup(function (e) {
         });
     }
 });
+

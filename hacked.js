@@ -38,16 +38,24 @@ var router = express.Router();
 
 router.route('/')
     .get([jwtauth], function (req, res) {
+        var uuid = jwt.decode(req.session.token, app.get('jwtTokenSecret')).iss;
+        
         app.locals.output = [];
+        app.locals.uuid = '\'' + uuid + '\'';
 
         return res.render('index');
     });
 
 router.route('/execute')
     .post([jwtauth], function (req, res) {
-        var username = jwt.decode(req.session.token, app.get('jwtTokenSecret')).iss;
+        var token = jwt.decode(req.session.token, app.get('jwtTokenSecret'));
+
+        var user = {
+            uuid: token.iss,
+            username: token.username
+        };
         
-        var command = new Command(io, username, req.body.command);
+        var command = new Command(io, user, req.body.command);
 
         return res.status(200).json({
             message: command.execute()
@@ -90,8 +98,9 @@ router.route('/login')
                     expires.setDate(expires.getDate() + 7);
 
                     var token = jwt.encode({
-                        iss: user.username,
-                        exp: expires
+                        iss: user.uuid,
+                        username: user.username,
+                        expires: expires
                     }, app.get('jwtTokenSecret'));
 
                     req.session.token = token;
