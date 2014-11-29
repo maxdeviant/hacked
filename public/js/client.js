@@ -25,6 +25,8 @@ $('#command').keyup(function (e) {
         $.post('http://localhost:3000/execute', {
             command: command
         }, function (data) {
+            $('#output').scrollTop($('#output')[0].scrollHeight);
+
             console.log(data);
         });
     }

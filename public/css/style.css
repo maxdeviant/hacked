@@ -23,3 +23,9 @@ body {
     margin-bottom: 0;
     max-width: 62.5rem;
 }
+
+.shell .output {
+    height: 80vh;
+    max-height: 80vh;
+    overflow-y: scroll;
+}
