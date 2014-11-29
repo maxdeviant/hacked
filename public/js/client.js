@@ -1,15 +1,19 @@
 var socket = io();
 
+var output = function (message) {
+    $('#output').append('<div>' + message + '</div>');
+};
+
 socket.on('broadcast-login', function (data) {
-    $('#output').append('<div>' + data.message + '</div>');
+    output(data.message);
 });
 
 socket.on('broadcast-say', function (data) {
-    $('#output').append('<div>' + data.message + '</div>');
+    output(data.message);
 });
 
 socket.on(user + '-response', function (data) {
-    console.log(data);
+    output(data.message);
 });
 
 $('#command').keyup(function (e) {
