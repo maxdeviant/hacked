@@ -84,6 +84,8 @@ router.route('/register')
 
 router.route('/login')
     .get(function (req, res) {
+        app.locals.loginError = '';
+
         return res.render('login');
     })
     .post(function (req, res) {
@@ -111,6 +113,8 @@ router.route('/login')
 
                     return res.redirect('/');
                 }
+
+                app.locals.loginError = 'Invalid username and/or password.';
 
                 return res.render('login');
             });
