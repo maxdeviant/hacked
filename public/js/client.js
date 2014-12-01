@@ -1,19 +1,27 @@
 var socket = io();
 
-var output = function (message) {
-    $('#output').append('<div>' + message + '</div>');
+var output = function (message, className) {
+    var html = '';
+
+    if (className) {
+        html = '<div ' + 'class="' + (className || '') + '">' + message + '</div>'
+    } else {
+        html = '<div>' + message + '</div>'
+    }
+
+    $('#output').append(html);
 };
 
 socket.on('broadcast-login', function (data) {
-    output(data.message);
+    output(data.message, 'broadcast');
 });
 
 socket.on('broadcast-say', function (data) {
-    output(data.message);
+    output(data.message, 'broadcast');
 });
 
 socket.on(user + '-response', function (data) {
-    output(data.message);
+    output(data.message, 'private');
 });
 
 $('#command').keyup(function (e) {

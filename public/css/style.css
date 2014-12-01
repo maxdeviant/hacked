@@ -29,3 +29,13 @@ body {
     max-height: 80vh;
     overflow-y: scroll;
 }
+
+/* Messages */
+
+.broadcast {
+    color: #fff;
+}
+
+.private {
+    color: #bbb;
+}
