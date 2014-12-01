@@ -42,6 +42,9 @@
                         </div>
                         <div class="small-9 column">
                             <input type="password" name="password">
+                            <% if (loginError !== '') { %>
+                                <small class="error"><%= loginError %></small>
+                            <% } %>
                         </div>
                     </div>
                 </div>
