@@ -40,8 +40,6 @@ $('#command').keyup(function (e) {
             command: command
         }, function (data) {
             $('#output').scrollTop($('#output')[0].scrollHeight);
-
-            console.log(data);
         });
     }
 });
