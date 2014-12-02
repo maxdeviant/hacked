@@ -104,6 +104,12 @@ router.route('/login')
 
             }
 
+            if (user === null) {
+                app.locals.loginError = 'Invalid username and/or password.';
+
+                return res.render('login');
+            }
+
             user.comparePassword(req.body.password, function (err, isMatch) {
                 if (isMatch) {
                     var expires = new Date();
