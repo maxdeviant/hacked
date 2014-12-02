@@ -43,3 +43,7 @@ body {
 .private {
     color: #bbb;
 }
+
+.error {
+    color: #f04124;
+}

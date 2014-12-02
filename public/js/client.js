@@ -24,6 +24,10 @@ socket.on(user + '-response', function (data) {
     output(data.message, 'private');
 });
 
+socket.on(user + '-error', function (data) {
+     output(data.message, 'error');
+});
+
 $('#command').focus();
 
 $('#command').keyup(function (e) {
