@@ -10,7 +10,9 @@ var jwt = require('jwt-simple');
 var session = require('express-session');
 
 // Import database models
-var models = require('./models');
+var mongoose = require('mongoose');
+var uuid = require('node-uuid');
+var User = require('./models/User');
 
 // Import custom modules
 var jwtauth = require('./lib/jwt-auth');
@@ -33,6 +35,8 @@ app.use(express.static(path.join(__dirname, 'public'), {
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+mongoose.connect('mongodb://localhost/hacked');
 
 var router = express.Router();
 
@@ -67,19 +71,19 @@ router.route('/register')
         return res.render('register');
     })
     .post(function (req, res) {
-        models.User.encryptPassword(req.body.password, function (hash) {
-            models.User.build({
-                username: req.body.username,
-                password: hash
-            })
-            .save()
-            .success(function (callback) {
-                return res.redirect('/');
-            })
-            .error(function (error) {
-                return res.json(error);
-            });
-        })
+        var user = new User();
+
+        user.uuid = uuid.v4();
+        user.username = req.body.username;
+        user.password = req.body.password;
+
+        user.save(function (err) {
+            if (err) {
+                return res.json(err);
+            }
+
+            return res.redirect('/');
+        });
     });
 
 router.route('/login')
@@ -89,11 +93,13 @@ router.route('/login')
         return res.render('login');
     })
     .post(function (req, res) {
-        models.User.find({
-            where: {
-                username: req.body.username
+        User.findOne({
+            username: req.body.username
+        }, function (err, user) {
+            if (err) {
+
             }
-        }).success(function (user) {
+
             user.comparePassword(req.body.password, function (err, isMatch) {
                 if (isMatch) {
                     var expires = new Date();
@@ -132,8 +138,6 @@ app.use('/', router);
 
 app.set('port', process.env.PORT || 3000);
 
-models.sequelize.sync().success(function () {
-    server.listen(app.get('port'), function () {
-        debug('Express server listening on port ' + server.address().port);
-    });
+server.listen(app.get('port'), function () {
+    debug('Express server listening on port ' + server.address().port);
 });
