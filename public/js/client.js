@@ -36,9 +36,19 @@ var KEYS = Object.freeze({
     DOWN_ARROW: 40
 });
 
+var commandHistory;
+var index;
+
 $('#command').keyup(function (e) {
+    commandHistory = commandHistory || [];
+    index = typeof index === 'undefined' ? commandHistory.length - 1 : index;
+
     if (e.keyCode === KEYS.ENTER) {
         var command = $('#command').val();
+
+        commandHistory.push(command);
+
+        index = commandHistory.length - 1;
 
         $('#command').val('');
 
@@ -47,6 +57,25 @@ $('#command').keyup(function (e) {
         }, function (data) {
             $('#output').scrollTop($('#output')[0].scrollHeight);
         });
+    } else if (e.keyCode === KEYS.UP_ARROW) {
+        $('#command').val(commandHistory[index]);
+
+        if (index > 0) {
+            index--;
+        } else {
+            index = 0;
+        }
+    } else if (e.keyCode === KEYS.DOWN_ARROW) {
+        // if (index < commandHistory.length) {
+        //     index++;
+
+        //     $('#command').val(commandHistory[index]);
+        // } else {
+        //     index = commandHistory.length;
+
+        //     $('#command').val('');
+        // }
     }
+    console.log(index)
 });
 
