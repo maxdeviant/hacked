@@ -25,7 +25,11 @@ var io = require('socket.io')(server);
 
 app.set('jwtTokenSecret', 'U1VQRVJfU0VDUkVUX0tFWQ==');
 
-app.use(session({ secret: 'SUPER_SECRET_KEY' }))
+app.use(session({
+    secret: 'SUPER_SECRET_KEY',
+    saveUninitialized: true,
+    resave: true
+}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
