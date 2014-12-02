@@ -24,7 +24,8 @@ var UserSchema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false
-    }
+    },
+    systems: [String]
 });
 
 UserSchema.methods.comparePassword = function (candidatePassword, callback) {
