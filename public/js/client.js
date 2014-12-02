@@ -30,8 +30,14 @@ socket.on(user + '-error', function (data) {
 
 $('#command').focus();
 
+var KEYS = Object.freeze({
+    ENTER: 13,
+    UP_ARROW: 38,
+    DOWN_ARROW: 40
+});
+
 $('#command').keyup(function (e) {
-    if (e.keyCode === 13) {
+    if (e.keyCode === KEYS.ENTER) {
         var command = $('#command').val();
 
         $('#command').val('');
