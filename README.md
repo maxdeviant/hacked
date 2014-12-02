@@ -13,15 +13,15 @@ Contributing
 
 `$ npm install`
 
-### Set up MySQL
+### Set up MongoDB
 
-Make sure you have MySQL installed.
+Make sure you have MongoDB installed.
 
-Run the server.
+`$ brew install mongodb`
 
-`$ mysql.server start`
+Make sure MongoDB is running.
 
-Create the database `hacked_development`.
+`$ mongod`
 
 ### Run the Hacked server
 
@@ -35,5 +35,5 @@ Suggested Reading
 * [Node.js](http://nodejs.org/documentation/)
 * [Express](http://expressjs.com/4x/api.html)
 * [Socket.io](http://socket.io/docs/)
-* [Sequelize](http://sequelizejs.com/docs)
+* [Mongoose](http://mongoosejs.com/docs/guide.html)
 * [EJS](http://www.embeddedjs.com/getting_started.html)
