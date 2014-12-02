@@ -24,6 +24,8 @@ socket.on(user + '-response', function (data) {
     output(data.message, 'private');
 });
 
+$('#command').focus();
+
 $('#command').keyup(function (e) {
     if (e.keyCode === 13) {
         var command = $('#command').val();
