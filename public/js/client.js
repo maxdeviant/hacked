@@ -76,6 +76,5 @@ $('#command').keyup(function (e) {
         //     $('#command').val('');
         // }
     }
-    console.log(index)
 });
 
