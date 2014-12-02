@@ -1,54 +1,66 @@
 'use strict';
 
+var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
-module.exports = function (sequelize, DataTypes) {
-    var User = sequelize.define('User', {
-        uuid: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4
-        },
-        username: {
-            type: DataTypes.STRING,
-            unique: true
-        },
-        password: DataTypes.STRING,
-        isAdmin: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: 0
+var SALT_WORK_FACTOR = 10;
+
+var UserSchema = new mongoose.Schema({
+    uuid: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    username: {
+        type: String,
+        lowercase: true,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
+});
+
+UserSchema.methods.comparePassword = function (candidatePassword, callback) {
+    bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+        if (err) {
+            return callback(err);
         }
-    }, {
-        classMethods: {
-            encryptPassword: function (password, next) {
-                var SALT_WORK_FACTOR = 10;
 
-                bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
-                    if (err) {
-                        throw err;
-                    }
-
-                    bcrypt.hash(password, salt, function (err, hash) {
-                        if (err) {
-                            throw err;
-                        }
-
-                        return next(hash);
-                    });
-                });
-            }
-        },
-        instanceMethods: {
-            comparePassword: function (candidatePassword, callback) {
-                bcrypt.compare(candidatePassword, this.getDataValue('password'), function (err, isMatch) {
-                    if (err) {
-                        return callback(err);
-                    }
-
-                    callback(null, isMatch);
-                });
-            }
-        }
+        callback(null, isMatch);
     });
-
-    return User;
 };
+
+var User = mongoose.model('User', UserSchema);
+
+UserSchema.pre('save', function (next) {
+    var user = this;
+
+    if (!user.isModified('password')) {
+        return next();
+    }
+
+    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+        if (err) {
+            return next(err);
+        }
+
+        bcrypt.hash(user.password, salt, function (err, hash) {
+            if (err) {
+                return next(err);
+            }
+
+            user.password = hash;
+
+            next();
+        });
+    });
+});
+
+module.exports = User;
