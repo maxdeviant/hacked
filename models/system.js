@@ -1,13 +1,12 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var ip = require('../lib/ip-address');
 
 var SystemSchema = mongoose.Schema({
     ipv4: {
         type: String,
         required: true,
-        default: ip.v4()
+        unique: true
     },
     url: {
         type: String,

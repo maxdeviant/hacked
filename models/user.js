@@ -25,6 +25,15 @@ var UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    location: {
+        type: String,
+        required: true
+    },
+    home: {
+        type: String,
+        required: true,
+        unique: true
+    },
     systems: [String]
 });
 

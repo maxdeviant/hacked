@@ -6,6 +6,8 @@ body {
 .top-bar,
 .top-bar-section li:not(.has-form) a:not(.button) {
     background: #bbb;
+    /*logout button color*/
+    color: red;
 }
 
 .container {
@@ -46,4 +48,10 @@ body {
 
 .error {
     color: #f04124;
+}
+
+/*Login changes*/
+
+p {
+    color: white;
 }

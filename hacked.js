@@ -12,7 +12,9 @@ var session = require('express-session');
 // Import database models
 var mongoose = require('mongoose');
 var uuid = require('node-uuid');
+var ip = require('./lib/ip-address');
 var User = require('./models/User');
+var System = require('./models/System');
 
 // Import custom modules
 var jwtauth = require('./lib/jwt-auth');
@@ -75,18 +77,31 @@ router.route('/register')
         return res.render('register');
     })
     .post(function (req, res) {
-        var user = new User();
+        var system = new System();
 
-        user.uuid = uuid.v4();
-        user.username = req.body.username;
-        user.password = req.body.password;
+        system.ipv4 = ip.v4();
 
-        user.save(function (err) {
+        system.save(function (err) {
             if (err) {
                 return res.json(err);
             }
 
-            return res.redirect('/');
+            var user = new User();
+
+            user.uuid = uuid.v4();
+            user.username = req.body.username;
+            user.password = req.body.password;
+            user.home = system._id;
+            user.systems.push(system._id);
+            user.location = system.ipv4;
+
+            user.save(function (err) {
+                if (err) {
+                    return res.json(err);
+                }
+
+                return res.redirect('/');
+            });
         });
     });
 
