@@ -19,7 +19,8 @@ var BankAccountSchema = mongoose.Schema({
     balance: {
         type: Number,
         default: 0.00
-    }
+    },
+    transferHistory: [String]
 });
 
 var BankAccount = mongoose.model('BankAccount', BankAccountSchema);
