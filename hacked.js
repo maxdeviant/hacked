@@ -13,8 +13,9 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 var uuid = require('node-uuid');
 var ip = require('./lib/ip-address');
-var User = require('./models/User');
-var System = require('./models/System');
+var User = require('./models/user');
+var System = require('./models/system');
+var BankAccount = require('./models/bank-account');
 
 // Import custom modules
 var jwtauth = require('./lib/jwt-auth');
