@@ -66,21 +66,12 @@ $('#command').keyup(function (e) {
             index = 0;
         }
     } else if (e.keyCode === KEYS.DOWN_ARROW) {
-        if (index < commandHistory.length-1) {
-            index ++;
+        if (index < commandHistory.length - 1) {
+            index++;
             $('#command').val(commandHistory[index]);
-        } else if(index = commandHistory.length-1){
-            $("#command").val('');
+        } else if (index = commandHistory.length - 1){
+            $('#command').val('');
         }
-        // if (index < commandHistory.length) {
-        //     index++;
-
-        //     $('#command').val(commandHistory[index]);
-        // } else {
-        //     index = commandHistory.length;
-
-        //     $('#command').val('');
-        // }
     }
 });
 
