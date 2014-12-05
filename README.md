@@ -19,10 +19,6 @@ Make sure you have MongoDB installed.
 
 `$ brew install mongodb`
 
-Install multiline.
-
-`$ npm install --save multiline`
-
 Make sure MongoDB is running.
 
 `$ mongod`
