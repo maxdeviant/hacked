@@ -28,6 +28,10 @@ socket.on(user + '-error', function (data) {
      output(data.message, 'error');
 });
 
+$('#output').on('click', '.clickable', function () {
+    $('#command').val($('#command').val() + $(this).text());
+});
+
 $('#command').focus();
 
 var KEYS = Object.freeze({
@@ -74,4 +78,3 @@ $('#command').keyup(function (e) {
         }
     }
 });
-
