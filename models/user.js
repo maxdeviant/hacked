@@ -34,7 +34,7 @@ var UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    log: {
+    ulog: {
         type: String,
         required: true
     },
