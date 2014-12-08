@@ -42,6 +42,8 @@ var KEYS = Object.freeze({
 
 var commandHistory;
 var index;
+var upOnce = false;
+var upCount = 0;
 
 $('#command').keyup(function (e) {
     commandHistory = commandHistory || [];
@@ -64,6 +66,7 @@ $('#command').keyup(function (e) {
     } else if (e.keyCode === KEYS.UP_ARROW) {
         $('#command').val(commandHistory[index]);
 
+
         if (index > 0) {
             index--;
         } else {
@@ -73,7 +76,7 @@ $('#command').keyup(function (e) {
         if (index < commandHistory.length - 1) {
             index++;
             $('#command').val(commandHistory[index]);
-        } else if (index = commandHistory.length - 1){
+        } else if (index == commandHistory.length - 1){
             $('#command').val('');
         }
     }
