@@ -36,6 +36,7 @@ var UserSchema = new mongoose.Schema({
     },
     ulog: {
         type: String,
+        default: '',
         required: true
     },
     systems: [String],
