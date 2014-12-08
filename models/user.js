@@ -34,6 +34,10 @@ var UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    log: {
+        type: String,
+        required: true
+    },
     systems: [String],
     accounts: [String]
 });
