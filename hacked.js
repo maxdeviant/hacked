@@ -80,10 +80,14 @@ router.route('/register')
         return res.render('register');
     })
     .post(function (req, res) {
-        var username = req.body.username.replace(/[^a-z0-9]/gi, '');
+        if (/[^a-z0-9]/gi.test(req.body.username)) {
+            app.locals.registrationError = 'Username must be alphanumeric.';
+
+            return res.render('register');
+        }
 
         User.findOne({
-            username: username
+            username: req.body.username
         }, function (err, user) {
             if (err || user !== null) {
                 app.locals.registrationError = 'This username is not available.';
@@ -103,7 +107,7 @@ router.route('/register')
                 var user = new User();
 
                 user.uuid = uuid.v4();
-                user.username = username;
+                user.username = req.body.username;
                 user.password = req.body.password;
                 user.home = system._id;
                 user.systems.push(system._id);
