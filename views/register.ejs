@@ -22,16 +22,43 @@
     </div>
     <div class="container">
         <form method="post">
-            <label for="username">Username</label>
-            <input type="text" name="username">
-            <% if (registrationError !== '') { %>
-                <small class="error"><%= registrationError %></small>
-            <% } %>
-
-            <label for="password">Password</label>
-            <input type="password" name="password">
-
-            <input type="submit" value="Register">
+            <div class="row">
+                <div class="small-6 column">
+                    <div class="row">
+                        <div class="small-3 column">
+                            <label class="inline" for="username">Username</label>
+                        </div>
+                        <div class="small-9 column">
+                            <input type="text" name="username">
+                            <% if (registrationError !== '') { %>
+                                <small class="error"><%= registrationError %></small>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-6 column">
+                    <div class="row">
+                        <div class="small-3 column">
+                            <label class="inline" for="password">Password</label>
+                        </div>
+                        <div class="small-9 column">
+                            <input type="password" name="password">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-6 column">
+                    <div class="row">
+                        <div class="small-9 column"></div>
+                        <div class="small-3 column">
+                            <input class="button secondary right" type="submit" value="Register">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </body>
