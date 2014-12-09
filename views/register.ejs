@@ -24,6 +24,9 @@
         <form method="post">
             <label for="username">Username</label>
             <input type="text" name="username">
+            <% if (registrationError !== '') { %>
+                <small class="error"><%= registrationError %></small>
+            <% } %>
 
             <label for="password">Password</label>
             <input type="password" name="password">

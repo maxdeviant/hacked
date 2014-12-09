@@ -75,44 +75,58 @@ router.route('/execute')
 
 router.route('/register')
     .get(function (req, res) {
+        app.locals.registrationError = '';
+
         return res.render('register');
     })
     .post(function (req, res) {
-        var system = new System();
+        var username = req.body.username.replace(/[^a-z0-9]/gi, '');
 
-        system.ipv4 = ip.v4();
+        User.findOne({
+            username: username
+        }, function (err, user) {
+            if (err || user !== null) {
+                app.locals.registrationError = 'This username is not available.';
 
-        system.save(function (err) {
-            if (err) {
-                return res.json(err);
+                return res.render('register');
             }
 
-            var user = new User();
+            var system = new System();
 
-            user.uuid = uuid.v4();
-            user.username = req.body.username;
-            user.password = req.body.password;
-            user.home = system._id;
-            user.systems.push(system._id);
-            user.location = system.ipv4;
+            system.ipv4 = ip.v4();
 
-            user.save(function (err) {
+            system.save(function (err) {
                 if (err) {
                     return res.json(err);
                 }
 
-                var expires = new Date();
-                expires.setDate(expires.getDate() + 7);
+                var user = new User();
 
-                var token = jwt.encode({
-                    iss: user.uuid,
-                    username: user.username,
-                    expires: expires
-                }, app.get('jwtTokenSecret'));
+                user.uuid = uuid.v4();
+                user.username = username;
+                user.password = req.body.password;
+                user.home = system._id;
+                user.systems.push(system._id);
+                user.location = system.ipv4;
 
-                req.session.token = token;
+                user.save(function (err) {
+                    if (err) {
+                        return res.json(err);
+                    }
 
-                return res.redirect('/');
+                    var expires = new Date();
+                    expires.setDate(expires.getDate() + 7);
+
+                    var token = jwt.encode({
+                        iss: user.uuid,
+                        username: user.username,
+                        expires: expires
+                    }, app.get('jwtTokenSecret'));
+
+                    req.session.token = token;
+
+                    return res.redirect('/');
+                });
             });
         });
     });
