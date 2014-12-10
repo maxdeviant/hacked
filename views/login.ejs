@@ -21,48 +21,54 @@
         </div>
     </div>
     <div class="container">
-        <form method="post">
-            <div class="row">
-                <div class="small-6 column">
-                    <div class="row">
-                        <div class="small-3 column">
-                            <label class="inline" for="username">Username</label>
-                        </div>
-                        <div class="small-9 column">
-                            <input type="text" name="username">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="small-6 column">
-                    <div class="row">
-                        <div class="small-3 column">
-                            <label class="inline" for="password">Password</label>
-                        </div>
-                        <div class="small-9 column">
-                            <input type="password" name="password">
-                            <% if (loginError !== '') { %>
-                                <small class="error"><%= loginError %></small>
-                            <% } %>
+        <div class="small-3 column">&nbsp;</div>  
+        <div class="small-6 column">
+            <form method="post">
+                <div class="row">
+                    <div class="small-12 column">
+                        <div class="row">
+                            <div class="small-3 column">
+                                <label class="inline" for="username">Username</label>
+                            </div>
+                            <div class="small-9 column">
+                                <input type="text" name="username">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="small-6 column">
-                    <div class="row">
-                        <div class="small-9 column"></div>
-                        <div class="small-3 column">
-                            <input class="button secondary right" type="submit" value="Login">
+                <div class="row">
+                    <div class="small-12 column">
+                        <div class="row">
+                            <div class="small-3 column">
+                                <label class="inline" for="password">Password</label>
+                            </div>
+                            <div class="small-9 column">
+                                <input type="password" name="password">
+                                <% if (loginError !== '') { %>
+                                    <small class="error"><%= loginError %></small>
+                                <% } %>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="small-12 column">
+                        <div class="row">
+                            <div class="small-9 column"></div>
+                            <div class="small-3 column">
+                                <input class="button secondary right" type="submit" value="Login">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="small-12 column">
+                    <p>Don't have an account? Click <a href="/register">here</a> to register.</p>
+                </div>
             </div>
-        </form>
-    </div>
-    <div>
-        <p>Don't have an account? Click <a href="/register">here</a> to register.</p>
+        </div>
+        <div class="small-3 column">&nbsp;</div>
     </div>
 </body>
 </html>
