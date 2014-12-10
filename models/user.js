@@ -34,6 +34,11 @@ var UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    ulog: {
+        type: String,
+        default: '',
+        required: true
+    },
     systems: [String],
     accounts: [String]
 });
