@@ -18,7 +18,8 @@ var SystemSchema = mongoose.Schema({
     },
     password: {
         type: String
-    }
+    },
+    logs: [String]
 });
 
 var System = mongoose.model('System', SystemSchema);
