@@ -31,7 +31,7 @@ socket.on(user + '-error', function (data) {
 });
 
 $('#output').on('click', '.clickable', function () {
-    $('#command').val($('#command').val() + $(this).text());
+    $('#command').val($('#command').val() + $(this).text() + ' ');
     $('#command').focus();
 });
 
