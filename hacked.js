@@ -193,6 +193,20 @@ app.use('/', router);
 
 app.set('port', process.env.PORT || 3000);
 
+if (process.argv[2] === 'init') {
+    for (var i = 0; i < 1000; i++) {
+        var system = new System();
+
+        system.ipv4 = ip.v4();
+
+        system.save(function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+}
+
 server.listen(app.get('port'), function () {
     console.log('Hacked server listening on port ' + server.address().port);
 });
