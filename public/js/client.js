@@ -61,7 +61,7 @@ $('#command').keyup(function (e) {
 
         $('#command').val('');
 
-        $.post('http://localhost:3000/execute', {
+        $.post('http://hacked.elliott.codes/execute', {
             command: command
         }, function (data) {
 

@@ -191,7 +191,7 @@ router.route('/logout')
 
 app.use('/', router);
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 9001);
 
 if (process.argv[2] === 'init') {
     for (var i = 0; i < 1000; i++) {
