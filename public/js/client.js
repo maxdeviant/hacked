@@ -10,6 +10,8 @@ var output = function (message, className) {
     }
 
     $('#output').append(html);
+
+    $('#output').scrollTop($('#output')[0].scrollHeight);
 };
 
 socket.on('broadcast-login', function (data) {
@@ -61,11 +63,10 @@ $('#command').keyup(function (e) {
         $.post('http://localhost:3000/execute', {
             command: command
         }, function (data) {
-            $('#output').scrollTop($('#output')[0].scrollHeight);
+
         });
     } else if (e.keyCode === KEYS.UP_ARROW) {
         $('#command').val(commandHistory[index]);
-
 
         if (index > 0) {
             index--;
