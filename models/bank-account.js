@@ -18,7 +18,7 @@ var BankAccountSchema = mongoose.Schema({
     },
     balance: {
         type: Number,
-        default: 0.00
+        default: 100.00
     },
     transferHistory: [String]
 });

@@ -1,22 +1,55 @@
+/* Global */
+
 body {
-    background: #333;
+    background: #282c34;
+}
+
+p,
+label {
+    color: #c2c6d0;
+}
+
+a {
+    color: #636b7c;
+}
+
+/* Foundation */
+
+a:hover {
+    color: #868d9c;
+}
+
+.button {
+    color: #c2c6d0;
+    background: #636b7c;
+}
+
+.button:hover {
+    color: #636b7c;
+    background: #c2c6d0;
 }
 
 .contain-to-grid,
 .top-bar,
 .top-bar-section li:not(.has-form) a:not(.button) {
-    background: #bbb;
-    /*logout button color*/
-    color: red;
+    background: #636b7c;
+    color: #c2c6d0;
 }
+
+.top-bar-section li:not(.has-form) a:not(.button):hover {
+    background: #49505f;
+    color: #c2c6d0;
+}
+
+/* UI */
 
 .container {
     margin-top: 25px;
 }
 
 .shell {
-    background: #333;
-    color: #fff;
+    background: #282c34;
+    color: #c2c6d0;
 }
 
 .shell .input {
@@ -39,19 +72,13 @@ body {
 /* Messages */
 
 .broadcast {
-    color: #fff;
+    color: #c2c6d0;
 }
 
 .private {
-    color: #bbb;
+    color: #c2c6d0;
 }
 
 .error {
-    color: #f04124;
-}
-
-/*Login changes*/
-
-p {
-    color: white;
+    color: #d08770;
 }
