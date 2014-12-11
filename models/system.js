@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
+var random = require('mongoose-random');
 
 var SystemSchema = mongoose.Schema({
     ipv4: {
@@ -20,6 +21,10 @@ var SystemSchema = mongoose.Schema({
         type: String
     },
     logs: [String]
+});
+
+SystemSchema.plugin(random, {
+    path: '__random'
 });
 
 var System = mongoose.model('System', SystemSchema);
