@@ -1,4 +1,4 @@
-var socket = io();
+var socket = io('http://hacked.elliott.codes:9001');
 
 var output = function (message, className) {
     var html = '';
