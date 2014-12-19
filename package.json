@@ -2,7 +2,7 @@
   "name": "hacked",
   "version": "0.0.0",
   "description": "Fulfill your hacker fantasies.",
-  "main": "index.js",
+  "main": "hacked.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
